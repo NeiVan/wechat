@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<link rel="stylesheet" type="text/css" href="{weixin::RES}/weicool/css/bootstrap_min.css" media="all" />
+<link rel="stylesheet" type="text/css" href="{weixin::RES}/weicool/css/bootstrap_responsive_min.css" media="all" />
+<link rel="stylesheet" type="text/css" href="{weixin::RES}/weicool/css/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="{weixin::RES}/weicool/css/todc_bootstrap_button.css" media="all" />
+<link rel="stylesheet" type="text/css" href="{weixin::RES}/weicool/css/themes.css" media="all" />
+<link rel="stylesheet" type="text/css" href="{weixin::RES}/weicool/css/inside.css" media="all" />
+<link rel="stylesheet" type="text/css" href="{weixin::RES}/weicool/css/chosen.css" media="all" />
+<script type="text/javascript" src="{weixin::RES}/weicool/js/jQuery.js"></script>
+<script type="text/javascript" src="{weixin::RES}/weicool/js/jquery_ui_widget_min.js"></script>
+<script type="text/javascript" src="{weixin::RES}/weicool/js/bootstrap_min.js"></script>
+<script type="text/javascript" src="{weixin::RES}/weicool/js/jquery_form_min.js"></script>
+<script type="text/javascript" src="{weixin::RES}/weicool/js/jquery_validate_min.js"></script>
+<script type="text/javascript" src="{weixin::RES}/weicool/js/jquery_validate_methods.js"></script>
+<script type="text/javascript" src="{weixin::RES}/weicool/js/jquery_form_wizard_min.js"></script>
+<script type="text/javascript" src="{weixin::RES}/weicool/js/moment_min.js"></script>
+<script type="text/javascript" src="{weixin::RES}/weicool/js/inside.js"></script>
+<script type="text/javascript" src="{weixin::RES}/weicool/js/jquery-1.8.0.min.js"></script>
+<script src="/tpl/static/fushionCharts/JSClass/FusionCharts.js" type="text/javascript"></script>  
+<script src="{weixin::RES}/js/date/WdatePicker.js"></script>
+<!--[if lte IE 9]><script src="{weixin::RES}/weicool/js/watermark.js"></script><![endif]-->
+<!--[if IE 7]><link href="{weixin::RES}/weicool/css/font_awesome_ie7.css" rel="stylesheet" /><![endif]-->
+</head>
+<body>
+   <div id="main">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <div class="span12">
+<div class="box">
+<div class="box-title">
+<div class="span10">
+<h3><i class="icon-table"></i>投票结果分析</h3>
+</div>
+<div class="span2"><a class="btn" href="Javascript:window.history.go(-1)">返回</a></div>
+</div>
+
+<div class="box-content">
+         
+
+<form name="submitbbb" action="__ACTION__" method="post" class='form-horizontal form-wizard'>
+
+<div class="step" id="firstStep">
+ 
+<div class="step-forms">
+<div class="span8">
+  
+<div class="control-group">
+ 
+<div class="controls">
+  <div class="input-prepend">
+
+      <span class="add-on">日期(始)： <i class="icon-calendar"></i></span>
+      <input type="text" name="BeginDate" id="bindingDateFrom" class="input-medium" value="{weixin:$pp.BeginDate}"  readonly  onClick="WdatePicker()" />
+      <span style="margin-left:30px;"  class="add-on">日期(终)： <i class="icon-calendar"></i></span>
+      <input type="text" name="EndDate" id="bindingDateTo" class="input-medium" value="{weixin:$pp.EndDate}" readonly  onClick="WdatePicker()" />
+      <span class="maroon">*</span>
+      <span style="margin-left: 30px;" class="add-on" name="xx">选项</span>
+  	  <select name="select" id="selectType">
+	  	<foreach name="selected" item="vo" key="k">
+			<option value="{weixin:$vo.id}">{weixin:$vo.voted_option}</option>
+		</foreach>
+	  </select>
+  </div>
+</div>
+</div>
+
+    
+<!--分页输出结束-->
+<div class="form-actions" align="center">
+                                    <button type="submit" id="bsubmit" data-loading-text="提交中..." class="btn btn-primary" onClick="submitbbb.action='/do.php?api=Clients&m=Vote_analysis&a=index';submitbbb.submit();">查询</button>
+                                    <button type="button" class="btn" onClick="window.history.go(-1);">取消</button>
+                                </div>
+ </form> 
+</div></div></div></div>
+<div>
+	<table border="1" width="30%" id="select">
+		    <caption style="text-align: left;">投票信息汇总<caption>
+            <tr style="background: #EEE;">
+             <th width="100px">选项</th>
+             <th width="100px">汇总</th>
+            </tr>
+            <foreach name="option" item="vo" key="k">
+		    	<tr>
+		    		<th>{weixin:$vo.voted_option}</th>
+		    		<td style="text-align: center;"><a href="{weixin::U('Vote_analysis/select',array('id'=>$vo['id'],'BeginDate'=>$vo['BeginDate'],'EndDate'=>$vo['EndDate']))}">{weixin:$vo.number}</a></td>
+		    	</tr>
+        	</foreach>
+	</table>
+</div>
+</div></div></div></div>
+</div></div></div></div>
+<include file="Public:footer"/>
