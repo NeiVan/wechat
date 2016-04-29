@@ -1,8 +1,5 @@
 <?php
 class Vote_analysisAction extends UsersAction{
-	public $token;
-	private $data;
-	private $rmid;
 	//构造函数
     public function _initialize(){
     	//调用父级别静态方法(构造函数)
